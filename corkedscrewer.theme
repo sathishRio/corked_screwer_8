@@ -1,0 +1,161 @@
+<?php
+
+/**
+ * Override or insert variables into the html template.
+ */
+function corkedscrewer_preprocess_html(&$variables) {
+  if (!theme_get_setting('responsive_respond','corkedscrewer')):
+    $variables['#attached']['library'] ='corkedscrewer/basic-layout';
+  endif;
+  $variables['#attached']['library'] ='corkedscrewer/ie';
+}
+
+/**
+ * Return a themed breadcrumb trail.
+ *
+ * @param $breadcrumb
+ *   An array containing the breadcrumb links.
+ * @return
+ *   A string containing the breadcrumb output.
+ */
+function corkedscrewer_preprocess_breadcrumb(&$variables){
+  if(($node = \Drupal::routeMatch()->getParameter('node')) && $variables['breadcrumb']){
+    // Adding the a divider of between home an the title of the page.
+    $variables['breadcrumb'][] = array('text' => theme_get_setting('breadcrumb_separator','corkedscrewer'),);
+    // Adding the title of the page in the breadcrumb
+    $variables['breadcrumb'][] = array(
+      'text' => $node->getTitle(),
+      'url' => $node->URL()
+    );
+  }
+}
+
+/**
+ * Implements Hook_page_top()
+ */
+function corkedscrewer_page_top($page) {
+
+  if (theme_get_setting('responsive_meta','corkedscrewer')):
+    $mobileoptimized = array(
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'name' =>  'MobileOptimized',
+        'content' =>  'width'
+      )
+    );
+
+    $handheldfriendly = array(
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'name' =>  'HandheldFriendly',
+        'content' =>  'true'
+      )
+    );
+
+    $viewport = array(
+      '#type' => 'html_tag',
+      '#tag' => 'meta',
+      '#attributes' => array(
+        'name' =>  'viewport',
+        'content' =>  'width=device-width, initial-scale=1'
+      )
+    );
+
+    drupal_add_html_head($mobileoptimized, 'MobileOptimized');
+    drupal_add_html_head($handheldfriendly, 'HandheldFriendly');
+    drupal_add_html_head($viewport, 'viewport');
+  endif;
+}
+
+/**
+ * Override or insert variables into the page template.
+ *
+ * Implements HOOK_preprocess_page()
+ *
+ */
+function corkedscrewer_preprocess_page(&$variables) {
+
+  // Get the menu
+  $main_links_source =theme_get_setting('menu_name', 'corkedscrewer');
+  if (Drupal::moduleHandler()->moduleExists('i18n_menu')) {
+    $variables['main_menu_tree'] = i18n_menu_translated_tree($main_links_source);
+  }
+  else {
+    $menu_tree = \Drupal::menuTree();
+    $parameters = $menu_tree->getCurrentRouteMenuTreeParameters($main_links_source);
+    $tree = $menu_tree->load($main_links_source, $parameters);
+    $variables['main_menu_tree'] = $menu_tree->build($tree);
+    $variables['main_menu_tree']['#attributes']['class']=array('menu');
+  }
+
+  // Get Secondary Menu
+
+  $menu_tree = \Drupal::menuTree();
+  $parameters = $menu_tree->getCurrentRouteMenuTreeParameters('account');
+  $tree = $menu_tree->load('account', $parameters);
+  $variables['secondary_menu_tree'] = $menu_tree->build($tree);
+  $variables['secondary_menu_tree']['#attributes']['class']=array('menu', 'secondary-menu', 'links', 'clearfix');
+
+  $variables['slideshow_display']=theme_get_setting('slideshow_display','corkedscrewer');
+  $variables['highlighted_display']=theme_get_setting('highlighted_display','corkedscrewer');
+  $variables['breadcrumb_display']=theme_get_setting('breadcrumb_display','corkedscrewer');
+
+
+  // Get slider Image
+  $variables['slideImage1']=drupal_get_path('theme', 'corkedscrewer')."/images/local/slider-img1.png";
+  $variables['slideImage2']=drupal_get_path('theme', 'corkedscrewer')."/images/local/slider-img1.png";
+  $variables['slideImage3']= drupal_get_path('theme', 'corkedscrewer')."/images/local/slider-img1.png";
+
+  $variables['featureImage1']=drupal_get_path('theme', 'corkedscrewer')."/images/local/ft-img1.png";
+  $variables['featureImage2']=drupal_get_path('theme', 'corkedscrewer')."/images/local/ft-img2.png";
+  $variables['featureImage3']= drupal_get_path('theme', 'corkedscrewer')."/images/local/ft-img3.png";
+  $variables['featureImage4']=drupal_get_path('theme', 'corkedscrewer')."/images/local/ft-img.png";
+  $variables['featureImage5']=drupal_get_path('theme', 'corkedscrewer')."/images/local/ft-img4.png";
+  $variables['featureImage6']= drupal_get_path('theme', 'corkedscrewer')."/images/local/ft-img5.png";
+  $variables['featureImage7']= drupal_get_path('theme', 'corkedscrewer')."/images/local/ft-img6.png";
+
+  /**
+   * Add javascript files for jquery slideshow.
+   */
+  if (theme_get_setting('slideshow_js','corkedscrewer')):
+
+    $variables['#attached']['library'][] ='corkedscrewer/jquery-cycle';
+    $variables['#attached']['library'] []='corkedscrewer/custom';
+
+    //Initialize slideshow using theme settings
+    $effect=theme_get_setting('slideshow_effect','corkedscrewer');
+    $effect_time=theme_get_setting('slideshow_effect_time','corkedscrewer')*1000;
+    $slideshow_randomize=theme_get_setting('slideshow_randomize','corkedscrewer');
+    $slideshow_wrap=theme_get_setting('slideshow_wrap','corkedscrewer');
+    $slideshow_pause=theme_get_setting('slideshow_pause','corkedscrewer');
+
+
+    $variables['#attached']['drupalSettings'] = array(
+      'effect' =>$effect,
+      'effect_time' =>$effect_time,
+      'slideshow_randomize'=>$slideshow_randomize,
+      'slideshow_wrap' => $slideshow_wrap,
+      'slideshow_pause' => $slideshow_pause,
+    );
+
+  endif;
+
+}
+
+/**
+ * @param $variables
+ *
+ * Implements HOOK_preprocess_node()
+ *
+ */
+function corkedscrewer_preprocess_node(&$variables){
+  // Get comment count
+  if ($variables['node']) {
+    $entityOf_node=entity_load('node',$variables['node']->id());
+    $variables['comment_count']=$entityOf_node->comment->comment_count;
+  }
+
+}
+

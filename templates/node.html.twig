@@ -1,0 +1,17 @@
+<div id="node-{{ node.id }}" class="{{ classes }}"{{ attributes }}>
+  <div class="content" {{ content_attributes }}>
+    {{ author_picture }}
+    {%  if display_submitted %}
+      <div class="node-info"><span class="user"></span>{{ author_name }} <span class="calendar"></span>{{ date }}</div>
+      {% endif %}
+    {{  content| without('comment','links','field_tags') }}
+  </div>
+  <div class="node-meta">
+    <ul class="node-link">
+      <li> <div class="comments-count"><span class="comments">{{ comment_count }}</span><a href="{{  url }}">comments</a></div></li>
+      <li> {{ content.links }}</li>
+    </ul>
+    {{ content.field_tags }}
+    {{ content.comment }}
+  </div>
+</div>

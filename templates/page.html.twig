@@ -1,0 +1,346 @@
+<!-- #page-wrapper -->
+<div id="page-wrapper">
+
+<!--#header-->
+<div id="header">
+<!--#header-inside-->
+<div id="header-inside" class="container_12">
+
+{% if page.header and  page.content_top is empty %}
+<div class="grid_9">
+  {% elseif page.header and page.content_top or page.content_top %}
+  <div class="grid_4">
+   {%  else %}
+    <div class="grid_12">
+    {% endif %}
+
+      <!-- #header-inside-left -->
+      <div id="header-inside-left">
+        {%  if page.header %}
+          {{ page.header }}
+        {% endif %}
+      </div>
+      <!--EOF:#header-inside-left-->
+    </div>
+
+    {% if page.content_top %}
+      <div class="grid_5">
+        <!-- #header-inside-right -->
+        <div id="content-top" class="clearfix">
+          {{ page.content_top }}
+        </div>
+        <!--EOF:#header-inside-right-->
+      </div>
+    {% endif %}
+
+    {%  if page.navigation %}
+      <div class="grid_3">
+        <!-- #header-inside-right -->
+        <div id="header-inside-right" class="clearfix">
+          {{ page.navigation }}
+        </div>
+        <!--EOF:#header-inside-right-->
+      </div>
+    {%  endif %}
+
+  </div>
+  <!--EOF:#header-inside-->
+</div>
+<!--EOF:#header-->
+
+<!--#main-menu-->
+<div id="main-menu" class="container_12">
+
+  <div class="grid_12">
+    <!--#main-menu-inside-->
+    <div id="main-menu-inside">
+      <!--#menu-->
+      <div id="menu" class="clearfix">
+        {{ main_menu_tree }}
+      </div>
+      <!--EOF:#menu-->
+    </div>
+    <!--EOF:#main-menu-inside-->
+  </div>
+
+</div>
+<!--EOF:#main-menu-->
+
+<!--#banner-->
+<div id="banner">
+  <!--#banner-inside-->
+  <div id="banner-inside" class="container_12">
+
+    {% if page.banner %}
+      <div class="grid_12">
+        {{ page.banner }}
+      </div>
+    {%  endif %}
+
+    {% if slideshow_display %}
+
+      {% if is_front %}
+
+        <div class="grid_12">
+          <!--#slideshow-->
+          <div id="slideshow">
+
+            <!--slides-->
+            <div class="slides">
+              <!--slider-item-->
+              <div class="slider-item">
+                <div class="slider-item-image"><img src="{{ slideImage1 }}"/></div>
+                <div class="slider-item-title">Corked Screwer</div>
+                <div class="slider-item-body">Unique resource for wine lovers</div>
+              </div>
+              <!--EOF:slider-item-->
+
+              <!--slider-item-->
+              <div class="slider-item">
+                <div class="slider-item-image"><img src="{{ slideImage2 }}"/></div>
+                <div class="slider-item-title light">Wine Lovers </div>
+                <div class="slider-item-body">Monaco restaurants</div>
+              </div>
+              <!--EOF:slider-item-->
+
+              <!--slider-item-->
+              <div class="slider-item">
+                <div class="slider-item-image"><img src="{{ slideImage3 }}"/></div>
+                <div class="slider-item-title light">Best Blog</div>
+                <div class="slider-item-body">Best wine ideas</div>
+              </div>
+              <!--EOF:slider-item-->
+
+              <!--slider-item-->
+              <div class="slider-item">
+                <div class="slider-item-image"><img src="{{ slideImage1 }}"/></div>
+                <div class="slider-item-title">Wine Lovers </div>
+                <div class="slider-item-body">Monaco restaurants</div>
+              </div>
+              <!--EOF:slider-item-->
+            </div>
+            <!--EOF:slides-->
+
+            <!--slide-control-->
+            <div class="slide-control">
+              <div id="prev" href="#"><span class="websymbols"><</span></div>
+              <div id="next" href="#"><span class="websymbols">></span></div>
+            </div>
+            <!--EOF:slide-control-->
+
+            <!--#slide-nav-->
+            <ul id="slide-nav">
+              <li><a href="#"></a></li>
+              <li><a href="#"></a></li>
+              <li><a href="#"></a></li>
+              <li><a href="#"></a></li>
+            </ul>
+            <!--EOF:#slide-nav-->
+
+          </div>
+          <!--EOF:#slideshow-->
+        </div>
+
+      {% endif %}
+
+    {%  endif %}
+
+  </div>
+  <!--EOF:#banner-inside-->
+</div>
+<!--EOF:#banner-->
+
+<!--#content-->
+<div id="content" class="container_12">
+<!--#content-inside-->
+<div id="content-inside" class="clearfix">
+
+  {% if highlighted_display %}
+
+    {% if is_front %}
+      <div class="grid_12">
+        <!--#featured-->
+        <div id="featured" class="clearfix">
+
+          <div class="grid_3 alpha">
+            <!--featured-teaser-->
+            <div class="featured-teaser">
+              <div class="featured-teaser-image"><a href="#"><img src="{{ featureImage1 }}"/></a></div>
+              <div class="featured-teaser-title">Monaco restaurants</div>
+              <div class="featured-teaser-body">25</div>
+            </div>
+            <!--EOF:featured-teaser-->
+
+            <!--featured-teaser-->
+            <div class="featured-teaser">
+              <div class="featured-teaser-image"><a href="#"><img src="{{ featureImage2 }}"/></a></div>
+              <div class="featured-teaser-title">Wine & Meat</div>
+              <div class="featured-teaser-body">25</div>
+            </div>
+            <!--EOF:featured-teaser-->
+
+            <!--featured-teaser-->
+            <div class="featured-teaser">
+              <div class="featured-teaser-image"><a href="#"><img src="{{ featureImage3 }}"/></a></div>
+              <div class="featured-teaser-title">Best wine deals</div>
+              <div class="featured-teaser-body">25</div>
+            </div>
+            <!--EOF:featured-teaser-->
+          </div>
+
+          <div class="grid_6">
+            <!--featured-->
+            <div class="featured">
+              <div class="featured-image"><a href="#"><img src="{{ featureImage4 }}"/></a></div>
+              <div class="featured-title"><h2><a href="#">The spirit of Italy</a> <span class="comments">12</span></h2></div>
+              <div class="featured-body">Italian wine is wine produced in Italy, a country which is home to some of the oldest wine-producing regions in the world. Italy is one of the world's foremost producers, responsible for approximately one-fifth of world wine production in 2005.</div>
+            </div>
+            <!--EOF:featured-->
+          </div>
+
+          <div class="grid_3 omega">
+            <!--featured-teaser-->
+            <div class="featured-teaser">
+              <div class="featured-teaser-image"><a href="#"><img src="{{ featureImage5 }}"/></a></div>
+              <div class="featured-teaser-title">Cheese</div>
+              <div class="featured-teaser-body">25</div>
+            </div>
+            <!--EOF:featured-teaser-->
+
+            <!--featured-teaser-->
+            <div class="featured-teaser">
+              <div class="featured-teaser-image"><a href="#"><img src="{{ featureImage6 }}"/></a></div>
+              <div class="featured-teaser-title">Red wine</div>
+              <div class="featured-teaser-body">25</div>
+            </div>
+            <!--EOF:featured-teaser-->
+
+            <!--featured-teaser-->
+            <div class="featured-teaser">
+              <div class="featured-teaser-image"><a href="#"><img src=" {{ featureImage7 }}"/></a></div>
+              <div class="featured-teaser-title">The best in the world</div>
+              <div class="featured-teaser-body">25</div>
+            </div>
+            <!--EOF:featured-teaser-->
+          </div>
+
+        </div>
+        <!--EOF:#featured-->
+      </div>
+
+    {%  endif %}
+
+  {%  endif %}
+
+  <div class="grid_12">
+    <div class="breadcrumb-wrapper">
+      {% if breadcrumb_display %}
+        {% if page.highlighted %}
+            {{ page.highlighted }}
+        {%  endif %}
+      {%  endif %}
+    </div>
+  </div>
+
+  {% if page.sidebar_first %}
+    <!--.sidebar first-->
+    <div class="grid_3">
+      <div class="sidebar">
+        {{ page.sidebar_first }}
+      </div>
+    </div>
+    <!--EOF:.sidebar first-->
+  {% endif %}
+
+
+  {%  if page.sidebar_first and page.sidebar_second %}
+  <div class="grid_6">
+    {%  elseif page.sidebar_first or page.sidebar_second %}
+    <div class="grid_9">
+      {%  else %}
+      <div class="grid_12">
+        {% endif %}
+        <!--#main-content-->
+        <div id="main-content">
+          {{  page.content }}
+        </div>
+        <!--EOF:#main-content-->
+      </div>
+
+
+      {% if page.sidebar_second %}
+        <!--.sidebar second-->
+        <div class="grid_3">
+          <div class="sidebar">
+            {{  page.sidebar_second }}
+          </div>
+        </div>
+        <!--EOF:.sidebar second-->
+      {%  endif %}
+
+    </div>
+    <!--EOF:#content-inside-->
+  </div>
+  <!--EOF:#content-->
+
+  <!--#footer-->
+  <div id="footer">
+    <!--#footer-top-->
+    <div id="footer-top" class="container_12">
+      <div class="grid_4">
+        <div class="footer-area">
+          {%  if page.footer_featured %}
+            {{ page.footer_featured }}
+          {%  endif %}
+        </div>
+      </div>
+      <div class="grid_2">
+        <div class="footer-area">
+          {%  if page.footer_first %}
+            {{ page.footer_first }}
+          {% endif %}
+        </div>
+      </div>
+      <div class="grid_2">
+        <div class="footer-area">
+          {% if page.footer_second %}
+            {{ page.footer_second }}
+          {% endif %}
+        </div>
+      </div>
+      <div class="grid_2">
+        <div class="footer-area">
+          {% if page.footer_third %}
+            {{ page.footer_third }}
+          {%  endif %}
+        </div>
+      </div>
+      <div class="grid_2">
+        <div class="footer-area">
+          {%  if page.footer_fourth %}
+            {{ page.footer_fourth }}
+          {%  endif %}
+        </div>
+      </div>
+    </div>
+    <!--EOF:#footer-top-->
+    <!--#footer-bottom-->
+    <div id="footer-bottom" class="container_12">
+      <div class="grid_12">
+        <!--#footer-bottom-inside-->
+        <div id="footer-bottom-inside">
+          {{ secondary_menu_tree }}
+          {%  if page.footer %}
+            {{ page.footer }}
+          {%  endif %}
+        </div>
+        <!--EOF:#footer-bottom-inside-->
+      </div>
+    </div>
+  </div>
+  <!--EOF:#footer-->
+
+</div>
+<!--EOF:#page-wrapper-->
+
+

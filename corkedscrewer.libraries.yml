@@ -1,0 +1,35 @@
+global-css:
+  css:
+    theme:
+      css/style.css: {}
+      css/reset.css: {}
+
+responsive:
+  css:
+    theme:
+      css/720.css: { media: all and (min-width: 760px) and (max-width: 980px) }
+      css/960.css: { media: all and (min-width: 980px) }
+      css/mobile.css: { media: all and (max-width: 760px) }
+
+jquery-cycle:
+  js:
+    js/jquery.cycle.all.js: {}
+  dependencies:
+      - core/jquery
+      - core/jquery.once
+      - core/drupal
+
+custom:
+  js:
+    js/custom.js: {}
+
+basic-layout:
+  css:
+    theme:
+      css/basic-layout.css: { group: CSS_THEME,browsers: { IE: '(lte IE 8)&(!IEMobile)', '!IE': false }, preprocess: FALSE }
+
+ie:
+  css:
+    theme:
+      css/ie.css: { group: CSS_THEME, browsers: { '!IE': false }, preprocess: FALSE }
+
